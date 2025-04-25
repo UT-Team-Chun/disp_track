@@ -1,0 +1,35 @@
+# 训练配置
+model: yolov8n.pt  # 使用更强大的small模型
+epochs: 200  # 增加训练轮数
+imgsz: 1024
+batch: 4
+device: '0'
+project: runs/detect
+name: train_improved
+workers: 4
+patience: 50 # 提前停止的耐心值
+amp: False
+
+# 数据增强配置
+mosaic: 0.3  # 适度使用马赛克增强
+mixup: 0.0   # 禁用mixup增强
+degrees: 0.0  # 禁用旋转
+translate: 0.1  # 允许些微的位移
+scale: 0.4  # 允许缩放
+fliplr: 0.5  # 允许水平翻转
+hsv_h: 0.015  # 色调调整
+hsv_s: 0.7  # 饱和度调整
+hsv_v: 0.4  # 亮度调整
+
+# 数据集配置
+data: datasets/dataset.yaml
+
+# 追踪配置
+source: datasets/test
+track_model: runs/detect/train_improved4/weights/best.pt
+detection_mode: false  # 使用检测模式
+show: false  # 显示检测结果
+save: true
+conf: 0.2  # 极低的置信度阈值
+iou: 0.3  # 较低的IOU阈值
+track_name: exp
